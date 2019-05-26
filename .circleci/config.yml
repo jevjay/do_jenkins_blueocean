@@ -9,5 +9,7 @@ workflows:
     jobs:
       - terraform-orb/fmt:
           name: tf-fmt
+          infrastructure_dir: ./terraform/files/droplet
       - terraform-orb/validate:
           name: tf-validate
+          infrastructure_dir: ./terraform/files/droplet
