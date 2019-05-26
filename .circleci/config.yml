@@ -7,11 +7,7 @@ orbs:
 workflows:
   pipeline:
     jobs:
-      - fetch-code
       - terraform-orb/fmt:
-          attach-workspace: true
-          checkout: false
-          infrastructure_dir: infra
           name: tf-fmt
-          requires:
-            - fetch-code
+      - terraform-orb/validate:
+          name: tf-validate
