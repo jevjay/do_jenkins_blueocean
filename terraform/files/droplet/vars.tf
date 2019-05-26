@@ -8,10 +8,10 @@ variable "service_name" {
   default = "gadgets"
 }
 
-# SSH key which should be used for node access
-variable "ssh_keys" {
-  type    = "list"
-  default = []
+# SSH keys which should be used for node access
+# Multiple ssh_key_id values need to be separated by comma sign
+variable "ssh_key_ids" {
+  default = ""
 }
 
 # Size of a droplet instance used for Jenkins
@@ -39,12 +39,24 @@ variable "enable_monitoring" {
   default = true
 }
 
-variable "priv_ssh_path" {
+variable "pvt_key" {
   default = "~/.ssh/id_rsa"
 }
 
 # Default Ubuntu Droplet user
 # Can be replaced by username used to SSH into the machine
-variable "username" {
-  default = "root"
+variable "ssh_username" {
+  default = ""
+}
+
+# Default Grafana username
+# IMPORTANT: Use default value only during the development/debugging
+variable "grafana_user" {
+  default = "admin"
+}
+
+# Default Grafana password.
+# IMPORTANT: Use default value only during the development/debugging
+variable "grafana_password" {
+  default = "admin"
 }
