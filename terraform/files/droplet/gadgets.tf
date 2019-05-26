@@ -10,6 +10,40 @@ resource "digitalocean_droplet" "gadgets" {
   user_data  = "${data.template_file.ignition.rendered}"
 }
 
+resource "digitalocean_firewall" "gadgets" {
+  name = "fwl-gadgets"
+
+  droplet_ids = ["${digitalocean_droplet.gadgets.id}"]
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "icmp"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "53"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol              = "udp"
+    port_range            = "53"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol              = "icmp"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
 data "template_file" "ignition" {
   template = "${file("config/ignition.tpl")}"
 
