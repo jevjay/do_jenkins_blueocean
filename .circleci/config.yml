@@ -3,3 +3,15 @@ version: 2.1
 orbs:
   general: edahlseng/general@1.20.0
   terraform: bankrate/terraform@1.0.1
+
+workflow:
+  pipeline:
+    jobs:
+      - fetch-code
+      - terraform-orb/fmt:
+          attach-workspace: true
+          checkout: false
+          infrastructure_dir: infra
+          name: tf-fmt
+          requires:
+            - fetch-code
