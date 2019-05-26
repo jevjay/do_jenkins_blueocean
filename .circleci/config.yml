@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   general: edahlseng/general@1.20.0
-  terraform: bankrate/terraform@1.0.1
+  terraform-orb: bankrate/terraform@1.0.1
 
 workflows:
   pipeline:
