@@ -39,24 +39,14 @@ variable "enable_monitoring" {
   default = true
 }
 
-variable "pvt_key" {
-  default = "~/.ssh/id_rsa"
-}
-
-# Default Ubuntu Droplet user
-# Can be replaced by username used to SSH into the machine
-variable "ssh_username" {
+variable "domain_name" {
   default = ""
 }
 
-# Default Grafana username
-# IMPORTANT: Use default value only during the development/debugging
-variable "grafana_user" {
-  default = "admin"
+variable "enable_backup" {
+  default = true
 }
 
-# Default Grafana password.
-# IMPORTANT: Use default value only during the development/debugging
-variable "grafana_password" {
-  default = "admin"
+variable "ssh_key" {
+  default = ""
 }
