@@ -1,3 +1,7 @@
+data "digitalocean_ssh_key" "blog" {
+  name = var.ssh_key_id
+}
+
 resource "digitalocean_project" "blog" {
   name        = "${var.domain_name}-ghost-blog"
   description = "A project to group all ${var.domain_name} Ghost blog resources."
@@ -6,18 +10,14 @@ resource "digitalocean_project" "blog" {
   resources   = [digitalocean_droplet.blog.urn, digitalocean_domain.blog.urn]
 }
 
-data "digitalocean_image" "ghost" {
-  name = "ghost-18-04"
-}
-
 resource "digitalocean_droplet" "blog" {
-  image      = data.digitalocean_image.ghost.image
+  image      = "ghost-18-04"
   name       = "${var.domain_name}-blog"
   region     = var.droplet_region
   size       = var.droplet_size
-  backups    = var.enable_backups
+  backups    = var.enable_backup
   monitoring = var.enable_monitoring
-  ssh_keys   = local.ssh_keys
+  ssh_keys   = [data.digitalocean_ssh_key.blog.id]
   tags       = [var.service_name]
 }
 

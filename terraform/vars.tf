@@ -8,9 +8,8 @@ variable "service_name" {
   default = "gadgets"
 }
 
-# SSH keys which should be used for node access
-# Multiple ssh_key_id values need to be separated by comma sign
-variable "ssh_key_ids" {
+# SSH key which should be used for node access
+variable "ssh_key_id" {
   default = ""
 }
 
@@ -45,8 +44,4 @@ variable "domain_name" {
 
 variable "enable_backup" {
   default = true
-}
-
-variable "ssh_key" {
-  default = ""
 }
