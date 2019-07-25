@@ -1,7 +1,3 @@
-locals {
-  ssh_count = (var.ssh_key == "" ? 0 : 1)
-}
-
 resource "digitalocean_project" "blog" {
   name        = "${var.domain_name}-ghost-blog"
   description = "A project to group all ${var.domain_name} Ghost blog resources."
@@ -12,12 +8,6 @@ resource "digitalocean_project" "blog" {
 
 data "digitalocean_image" "ghost" {
   name = "ghost-18-04"
-}
-
-resource "digitalocean_ssh_key" "default" {
-  count      = local.ssh_count
-  name       = "Terraform Example"
-  public_key = "${file(var.ssh_key)}"
 }
 
 resource "digitalocean_droplet" "blog" {
